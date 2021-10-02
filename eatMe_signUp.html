@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    <title>Eatme Sign up</title>
+</head>
+<body>
+    <div class = "container  bg-info  d-flex justify-content-center" style="min-height: 100vh;">
+        <div class = "mt-4 bg-gradient" style="width: 75vh;">
+            <div class="row-logo d-flex justify-content-center">
+                <img class="rounded mt-1" src="./jQuery/Ajax/eatMe.png" width="50px" height="50px">
+                <h2 class = "ms-2">Eatme</h2>
+            </div>
+
+            <!-- TITLE -->
+            <h4 class="text-center">Getting Started</h4>
+            <p class="text-center">Create an account to continue!</p>
+
+            <!-- FORM SIGN IN  -->
+            <form>
+                <!-- EMAIL  -->
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="softech@gmail.com">
+                <!-- PASSWORD  -->
+                <label class="form-label" for="password">password</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="password">  
+                <!-- FULLNAME  -->
+                <label class="form-label" for="fullname">Fullname</label>
+                <input class="form-control" id="fullname" name="fullname" placeholder="fullname">
+            </form>
+
+            <!-- BUTTON SIGN UP  -->
+            <button class="mt-5 form-control btn-danger mt-2" id="btnSignUp" name="btnSignUp">Sign Up</button>
+
+            <!-- BUTTON SIGN IN WITH FACEBOOK  -->
+            <button class="mt-5 form-control btn-primary" id="btnLoginFacebook">
+                <span class="iconify" data-icon="ant-design:facebook-outlined" data-width="30" data-height="30"></span>
+                Continue With Facebook</button>
+            
+            <!-- BUTTON SIGN IN WITH GOOGLE  -->
+            <button class="form-control mt-3 mb-4" type="button" id="btnLoginGoogle">
+                <span class="iconify" data-icon="flat-color-icons:google" data-width="30" data-height="30"></span>
+                Continue With Google</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#btnSignUp").click(function(){
+                const email = $("#email").val();
+                const password = $("#password").val();
+                const fullname = $("#fullname").val();
+                console.log(email,password,fullname);
+                //CALL AJAX
+                $.ajax({
+                    url : "https://training.softech.cloud/api/users/register",
+                    method : "POST",
+                    data : {
+                        email : email,
+                        password : password,
+                        fullname : fullname,
+                    },
+
+                    success : function (data,textStatus){
+                        console.log(data);
+                        if(data.ok === true){
+                            alert("SIGN UP SUCCESS");
+                        }
+                        else{
+                            alert("SIGN UP FAIL");
+                        }
+                    },
+                    error : function(data,textStatus){
+                        console.log(data);
+                        console.log(textStatus);
+                    }
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>

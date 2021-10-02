@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    <title>Eatme Sign In</title>
+</head>
+<body>
+    <div class = "container  bg-info  d-flex justify-content-center" style="min-height: 100vh;">
+        <div class = "mt-4 bg-gradient rounded" style="width:75vh;">
+            <div class="row-logo d-flex justify-content-center">
+                <img class="rounded mt-1" src="./jQuery/Ajax/eatMe.png" width="50px" height="50px">
+                <h2 class = "ms-2">Eatme</h2>
+            </div>
+
+            <!-- TITLE -->
+            <h4 class="text-center">Reset Your Password</h4>
+            <p class="text-center">At least 9 character upper case and lower case letter</p>
+
+            <!-- FORM RESET PASSWORD  -->
+            <form>
+                <!-- EMAIL  -->
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="softech@gmail.com">
+               <!-- PASSWORD  -->
+                <label class="form-label" for="password">password</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="password">              
+                <!-- NEW PASSWORD  -->
+                <label class="form-label" for="newPassword">New Password</label>
+                <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="new password">              
+                
+
+            <!-- BUTTON RESET PASSWORD  -->
+            <button class="form-control btn-danger mt-5 mb-4" type="button" id="btnChangePassword" name="btnChangePassword">Change Password</button>
+        </form>    
+    </div> 
+    <script>
+        $(document).ready(function (){
+            $("#btnChangePassword").click(function(){
+                const email = $("#email").val();
+                const password = $("#password").val();
+                const newPassword = $("#newPassword").val();
+
+                console.log(email,password,newPassword);
+
+                $.ajax({
+                    url : "https://training.softech.cloud/api/users/change-password",
+                    method : "POST",
+                    data : {
+                        email : email,
+                        password : password,
+                        newPassword : newPassword,
+                    },
+
+                    success : function(data,textStatus){
+                        console.log(data);
+                        if(data.ok === true){
+                            alert("CHANGE PASSWORD SUCCESS");
+                        }
+                        else{
+                            alert("CHANE PASSWORD FAIL");
+                        }
+                    },
+                    error : function(data,textStatus){
+                        console.log(data);
+                        console.log(textStatus);
+                    }                    
+
+                });
+            });
+        });
+    </script>    
+</body>
+</html>
